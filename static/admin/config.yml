@@ -1,5 +1,6 @@
 backend:
-  name: test-repo
+  name: my-blog
+  repo: Oguzyildirim/my-blog
 
 media_folder: static/assets
 public_folder: assets
