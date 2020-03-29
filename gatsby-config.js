@@ -1,12 +1,13 @@
 module.exports = {
   siteMetadata: {
     // edit below
-    title: `Oguzhan's Personal Blog`,
+    title: `Stuff`,
     author: `Oguzhan Yildirim`,
     description: `My blog to share ideas.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
     social: {
       twitter: `OguzhanY19`,
+      github:  `Oguzyildirim`,
     },
   },
   plugins: [
@@ -77,7 +78,7 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         // edit below
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/my-icon.jpg`,
       },
     },
     {

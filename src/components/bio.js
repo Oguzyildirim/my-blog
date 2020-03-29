@@ -34,12 +34,11 @@ function Bio() {
               }}
             />
             <p>
-              Written by <strong>{author}</strong> who lives and works in San
-              Francisco building useful things.
+              Personal blog by <strong>{author}</strong>.
               {` `}
               <a href={`https://twitter.com/${social.twitter}`}>
-                You should follow him on Twitter
-              </a>
+              Twitter
+              </a>{' '}
             </p>
           </Container>
         )
