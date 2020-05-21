@@ -74,8 +74,8 @@ module.exports = {
         name: `Gatsby Starter Blog`,
         short_name: `GatsbyJS`,
         start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#663399`,
+        background_color: `#007acc`,
+        theme_color: `#282c35`,
         display: `minimal-ui`,
         // edit below
         icon: `content/assets/my-icon.jpg`,
