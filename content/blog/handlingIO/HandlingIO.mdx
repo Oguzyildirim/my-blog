@@ -8,7 +8,7 @@ description: "Handling IO"
 
 ![io](./io.jpg)
 
-We want to build concurrent and performant software applications and there are new tools to compute-heavy workloads!
+We want to  build concurrent and performant software applications and there are new tools to compute-heavy workloads!
 
 I am big fan of Node.js and it is great experience developing applications with Node.js but today other platforms have their own APIs to implement non-blocking IO application with new libraries like Reactive Spring, .Net Core, Vert.x  but the way is same; non-blocking, single treaded and event driven applications.
 
@@ -68,7 +68,7 @@ Input and output (I/O) operations on a computer can be extremely slow compared t
 >Alternatively, it is possible to start the communication and then perform processing that does not require that the I/O be completed. This approach is called asynchronous input/output. Any task that depends on the I/O having completed (this includes both using the input values and critical operations that claim to assure that a write operation has been completed) still needs to wait for the I/O operation to complete, and thus is still blocked, but other processing that does not have a dependency on the I/O operation can continue.
 
 - After a crazy friday night with your friends you need to go rest a bit. You wake up saturday morning, take a cup of coffee and start reading my blog and you notice there is a topic about something called handling I/O. Last thing you remember our system doesn't handle anything anymore, you goofed up because your system waste so much time between network requests waiting I/O to respond and your I/O system sitting there like a useless piece of software and waiting  endless roads to come end of the road and this makes your application inefficient because you are waiting this endless roads to respond you something and finally roads come to an end your thread able to finish his job.
-- You simply blocked your thread to wait the network request and multithreading is not a solution anymore because context switching costs a lot and all threads add additional resource. You can't have unlimited number of threads you can do better than that it is time to break to walls. It is time to introduce something new! Actually the idea is simple instead of scaling your application horizontally or adding new threads. You just need to run your application on a single thread and make the I/O calls asynchronous. How is that sound now? Because remember network request are endless roads you experience it and you don't want to wait this roads to finish to do your other jobs. Basically you create  a thing called callback and when the road finished you got an signal saying you  **HEYYYYYY!!**, your request is here and you can proceed.
+- You simply blocked your thread to wait the network request and multithreading is not a solution anymore because context switching costs a lot and all threads add additional resource. You can't have unlimited number of threads you can do better than that it is time to break to walls. It is time to introduce something new! Actually the idea is simple instead of scaling your application horizontally or adding new threads. You just need to run your application on a single thread and make the I/O calls asynchronous, what i mean by that is make event driven HTTP servers. How is that sound now? Because remember network request are endless roads you experience it and you don't want to wait this roads to finish to do your other tasks. Basically you create  a thing called callback and when the road finished you got an signal saying you  **HEYYYYYY!!**, your request is here and you can proceed. Basically minimizing the time you spend I/O makes you able to handle throughput, scale your application.
 
 - Every new concept we introduce to improve throughput, latency, and/or responsiveness of your application and also add complexity but with this way you don't have to deal with synchronization between threads or you don't need to scale your application horizontally because you have limited resources but that doesn't means statelessness is a bad thing but efficient way to solve your problems.
 
@@ -78,7 +78,9 @@ Input and output (I/O) operations on a computer can be extremely slow compared t
 **Go** (has Goroutines it is perfect way to deal with threads i believe but the binary program runs on single thread) **Javascript** single treaded language and has the nature of event driven architecture and **Kotlin** has Coroutines.
 - Big players has introduced new APIs as we talked before; **[.Net Core](https://docs.microsoft.com/en-us/dotnet/core/), **[SpringWebFlux](https://docs.spring.io/spring/docs/current/spring-framework-reference/web-reactive.html), **[Vert.x](https://vertx.io/)** and many others and it is worth to mention  the java community added to NIO module to **[J2SE 1.4](https://www.jcp.org/en/jsr/detail?id=51)** already back in 2002 and **[Netty](https://netty.io/)** is actively developed since 2004 so we can't say this is an new concept but with no regret nowadays it is popular and perfect way to handle IO. There are benchmark test you can found online comparison of these APIs.
 
-- The idea is simple DO NOT block the IO so we have APIs for developing event driven HTTP servers. I can't compare these tools, frameworks or whatever they are but every platform has their APIs today i want to talk about handling IO and now you can go and find out what you are going to achieve with this APIs.
+- The idea is simple DO NOT block the IO so we have APIs for developing event driven HTTP servers.
+
+-Today we have talked about I/O. Now it is time to tests these perfect APIs.
 
 ### Oguz
 
