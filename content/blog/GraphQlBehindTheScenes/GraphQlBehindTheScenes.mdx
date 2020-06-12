@@ -39,11 +39,8 @@ description: "How GraphQl works behind the scenes"
 ## GraphQL Documents
   >A GraphQL Document describes a complete file or request string operated on by a GraphQL service or client. A document contains multiple definitions, either executable or representative of a GraphQL type system.
 
-  >Documents are only executable by a GraphQL service if they contain an OperationDefinition and otherwise only contain ExecutableDefinition. However documents which do not contain OperationDefinition or do contain TypeSystemDefinition or TypeSystemExtension may still be parsed and validated to allow client tools to represent many GraphQL uses which may appear across many individual files.
+  - In GraphQL when a client makes a request to GraphQL server with GraphQL query language, we refer to these request as documents and a document may contain operations (queries, mutations, and subscriptions) as well as fragments(A GraphQL fragment is a shared piece of query logic, basically you able to reuse logic), a common unit of composition allowing for query reuse.
 
-  >A GraphQL document is defined as a syntactic grammar where terminal symbols are tokens (indivisible lexical units). These tokens are defined in a lexical grammar which matches patterns of source characters (defined by a double‐colon ::).
-
-  - In GraphQL when a client makes a request to GraphQL server with GraphQL query language, we refer to these request as documents and a document may contain operations (queries, mutations, and subscriptions) as well as fragments, a common unit of composition allowing for query reuse
 
 ## Parsing queries
 
@@ -60,13 +57,9 @@ description: "How GraphQl works behind the scenes"
 
 - GraphQL has an parser to parse incoming strings, and does Lexical Analysis and Syntactic Analysis to create an **Abstract Syntax Tree**
 
-
-
 - GraphQL spec defines query language perfectly but various implementation has their own lexer, parser or the data structure. This is very important thing because every language has their own data structure and language specific features and also this makes GraphQL can be used in widely different ways.
 
 - If you want to be evolve in GraphQL community and get to know more about project you should read **[GraphQL Spec](https://spec.graphql.org/)**
-
-
 
 ## Production Ready Queries
 
@@ -94,22 +87,28 @@ description: "How GraphQl works behind the scenes"
 ## Execution of queries
 
   - After being validated, a GraphQL query is executed by a GraphQL server and GraphQL generates a response from a request via execution.
-  - Every requested query consists of a few pieces of information.
+  - Every request consists of a few pieces of information.
     - The schema to use, a GraphQL schema.
-    -
+    - A Document with GraphQL OperationDefinition and may contain FragmentDefinition.
+    - A document may have more than one Operation.
+    -Optionally: The name of the Operation in the Document to execute.
+    -Optionally: Values for any Variables defined by the Operation.
+    -An initial value corresponding to the root type being executed. Conceptually, an initial value represents the “universe” of data available via a GraphQL Service. It is common for a GraphQL Service to always use the same initial value for every request.
+  - Given this information, the result of ExecuteRequest() produces our response.
+    - ExecuteRequest calls GetOperation() function.
+    - GraphQL parses and invalidates the variables passed in to operation using method called CoerceVariableValues
+       - GraphQL has Scalar Coercion, as we mentioned before GraphQL doesn't use particular way to receive requests but GraphQL takes care common formats like HTTP/JSON and there are some differences with JSON and GraphQL type System so to create solution for this problems GraphQL has some rules coercing coming input types and output coercions allow mapping GraphQL type system.
+    - Every operation has OperationDefinition(query, mutation, subscriptions) and ExecuteSelectionSet() method.
+    - SelectionSet has Fields like (movies, stars, title, year, oscars etc.)
+    - GraphQL calls SelectionsSet until hitting the response and calls ResolveFieldValue() and CompleteValue() and checks the output type.
 
--Returning the result.
--Brief talk about various implementation of graphql, pros and cons and future of graphql.
--Testing graphql
+## Testing graphql
 
-
--GraphQL has only been a publicly-available technology for a little over a year, so there aren’t yet clear best practices
-
-
----
+## GraphQL implementations
+  - After all we talked, we can clearly see that GraphQL is not equal to its implementations.
+  - GraphQL has only been a publicly-available technology for a little over a year, so there aren’t yet clear best practices but there are really good implementations out there, go check them out.
 
 ### Oguz
-
 ---
 ## Useful links
 
