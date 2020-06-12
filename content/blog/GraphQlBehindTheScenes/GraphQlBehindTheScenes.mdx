@@ -4,9 +4,46 @@ date: "2020-05-22"
 description: "How GraphQl works behind the scenes"
 ---
 
-Under development.
--Networking in GraphQl.
--Parsing queries and production ready queries(caching queries etc.)
+---
+
+![GraphQlLogo](./graphql.png)
+
+>“GraphQL is a query language for your API that shifts the contract between clients and servers that allows the server to say ‘these are the capabilities that I exposed’ and allows the clients to describe their requirements in a way that ultimately empowers product developers to build the products they want to create.” — Dan Schafer, GraphQL Co-Creator
+
+## Why GraphQL
+
+- GraphQL is really simplest form of exchanging data between your clients and  server
+
+- The languages like javascript dynamically typed(weakly typed) makes developing process error prone, GraphQL makes you able to works as safe as possible in terms of Type-Safe and makes your developing experience as perfect as possible.
+
+- You can declare exactly what you need from server and receive the requested data in a predictable way, GraphQl makes you retrieve many resources from the server in a single request  and writing GraphQL queries is really easy.
+
+- There are several implementations of GraphQL and the project like **[Apollo](https://www.apollographql.com/docs/react/)** makes you able to retrieve data as easy as possible to your client, believe me very strong and great community support, there are several post about problems on current APIs and comparison between RESTful APIs but today we are going to talk about hidden and production ready parts of GraphQL.
+
+## Network Layer
+
+- Actually GraphQL spec doesn't define anything related to networking and actually what GraphQL is more about Parsing, Validating and Executing query so I want to give you a brief introduction of networking part of GraphQL because i believe there are some misunderstanding about it.
+
+- So before a query get executed your server should receive a request and there is no new protocol or something, GraphQL is typically can be **[served over HTTP](https://graphql.org/learn/serving-over-http/)** via a single endpoint which expresses the full set of capabilities of the service or you can use **[MQTT](https://www.npmjs.com/package/graphql-mqtt-subscriptions)**.
+
+
+- And it is good to mention you can clearly see that we mention single endpoint so not like Rest APIs which expose a suite of URLs, that is also available on GraphQL but not recommended because of tools like **[GraphiQL](https://github.com/graphql/graphiql)**.
+
+- So GraphQL is actually transport layer agnostic, so you could choose protocols other than HTTP to implement your server and the community has largely standardized on HTTP POST requests, but it's more likely up to you how to send GraphQL requests, you cloud even send your request with  custom header, protoBuf or even as a cookie.
+
+- GraphQL services usually respond using JSON, but again this isn't required. Maybe JSON may seem a bad choice for you and you may want use GZIP.
+>Accept-Encoding: gzip
+
+- So being protocol agnostic makes able community to create a really cool projects like **[Neo4j and GraphQL integration](https://neo4j.com/developer/graphql/)**, so there are various implementations of GraphQL servers, all of them have different approaches there is no good or bad.
+
+
+## Parsing queries
+
+- So we handled the network, we are able to pass our queries in our system via network calls, great!
+
+
+
+production ready queries(caching queries etc.)
 -Persisted queries
 -Validation queries
 -Execution of queries
