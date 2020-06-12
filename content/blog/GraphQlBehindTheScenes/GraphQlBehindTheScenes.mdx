@@ -36,20 +36,75 @@ description: "How GraphQl works behind the scenes"
 
 - So being protocol agnostic makes able community to create a really cool projects like **[Neo4j and GraphQL integration](https://neo4j.com/developer/graphql/)**, so there are various implementations of GraphQL servers, all of them have different approaches there is no good or bad.
 
+## GraphQL Documents
+  >A GraphQL Document describes a complete file or request string operated on by a GraphQL service or client. A document contains multiple definitions, either executable or representative of a GraphQL type system.
+
+  >Documents are only executable by a GraphQL service if they contain an OperationDefinition and otherwise only contain ExecutableDefinition. However documents which do not contain OperationDefinition or do contain TypeSystemDefinition or TypeSystemExtension may still be parsed and validated to allow client tools to represent many GraphQL uses which may appear across many individual files.
+
+  >A GraphQL document is defined as a syntactic grammar where terminal symbols are tokens (indivisible lexical units). These tokens are defined in a lexical grammar which matches patterns of source characters (defined by a double‐colon ::).
+
+  - In GraphQL when a client makes a request to GraphQL server with GraphQL query language, we refer to these request as documents and a document may contain operations (queries, mutations, and subscriptions) as well as fragments, a common unit of composition allowing for query reuse
 
 ## Parsing queries
 
-- So we handled the network, we are able to pass our queries in our system via network calls, great!
+- We handled the networking, we are able to pass these queries in our system via network calls, great!
+
+- Clients use the GraphQL query language to make requests to a GraphQL service and GraphQL's Query Language is made of there main thing;
+  - An alphabet, set of char to make a language. GraphQL documents are expressed as a sequence of Unicode characters
+  - Tokens, The things carry special meaning like Query, Mutation, !	$	(	)	...	:	=	@	[	]	{	|	}
+  - Formal grammar, Basically rules of syntax.
+
+ ##### An example of query
+
+![GraphQlQuery](./graphqlquery.png)
+
+- GraphQL has an parser to parse incoming strings, and does Lexical Analysis and Syntactic Analysis to create an **Abstract Syntax Tree**
 
 
 
-production ready queries(caching queries etc.)
--Persisted queries
--Validation queries
--Execution of queries
+- GraphQL spec defines query language perfectly but various implementation has their own lexer, parser or the data structure. This is very important thing because every language has their own data structure and language specific features and also this makes GraphQL can be used in widely different ways.
+
+- If you want to be evolve in GraphQL community and get to know more about project you should read **[GraphQL Spec](https://spec.graphql.org/)**
+
+
+
+## Production Ready Queries
+
+- Last section we talked about parsing queries, but what happens if queries become too long and taking too much time to parse?
+
+- Maybe your GraphQL implementation doesn't makes you happy about parsing your long queries so there is a solution for that **Static Queries**.
+  - Static queries makes you able to avoid genarating queries dynamically at runtime unless you have an public api and facing tons of different queries like github.
+  - You can persist your queries to database on production and that makes your server only accept the specific queries and your system become more secure and reliable.
+  - It is easy to keep track of your queries and Analysis of queries.
+  - There are also good practices around static queries one is you can name your queries and your client only send IDs, your server keep track of these ID to identify queries that     means you don't event need to send queries.
+  - After GraphQL query parsed, there is a validation phase which makes sure your query is valid that is make sure you are requesting fields that exist, arguments populating etc.
+    and also GraphQL spec says that is still possible to an invalid request may pass all the validation rules so that makes persisted queries must.
+  - In simple terms you don't need to lexer, parser or validator for your queries in production.
+
+
+## GraphQL Documents
+  >A GraphQL Document describes a complete file or request string operated on by a GraphQL service or client. A document contains multiple definitions, either executable or representative of a GraphQL type system.
+
+  >Documents are only executable by a GraphQL service if they contain an OperationDefinition and otherwise only contain ExecutableDefinition. However documents which do not contain OperationDefinition or do contain TypeSystemDefinition or TypeSystemExtension may still be parsed and validated to allow client tools to represent many GraphQL uses which may appear across many individual files.
+
+  >A GraphQL document is defined as a syntactic grammar where terminal symbols are tokens (indivisible lexical units). These tokens are defined in a lexical grammar which matches patterns of source characters (defined by a double‐colon ::).
+
+  - In GraphQL when a client makes a request to GraphQL server with GraphQL query language, we refer to these request as documents and a document may contain operations (queries, mutations, and subscriptions) as well as fragments, a common unit of composition allowing for query reuse
+
+## Execution of queries
+
+  - After being validated, a GraphQL query is executed by a GraphQL server and GraphQL generates a response from a request via execution.
+  - Every requested query consists of a few pieces of information.
+    - The schema to use, a GraphQL schema.
+    -
+
 -Returning the result.
 -Brief talk about various implementation of graphql, pros and cons and future of graphql.
 -Testing graphql
+
+
+-GraphQL has only been a publicly-available technology for a little over a year, so there aren’t yet clear best practices
+
 
 ---
 
